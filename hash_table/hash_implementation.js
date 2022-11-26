@@ -78,11 +78,9 @@ class HashTable {
 
 const hashTable = new HashTable(1000);
 
-hashTable.set("grapes", 23);
-hashTable.set("apple", 190);
-hashTable.set("abc", 10);
-hashTable.set("def", 130);
-hashTable.set("ghi", 150);
-hashTable.set("jkl", 170);
-let val = hashTable.values();
-console.log(val); // 190
+hashTable.set("grapes", 40);
+hashTable.set("apple", 90);
+hashTable.set("banana", 30);
+hashTable.set("strawberry", 150);
+let val = hashTable.keys();
+console.log(val);
