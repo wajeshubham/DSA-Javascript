@@ -3,14 +3,16 @@
 ```bash
 access: O(1)
 
-insert: O(1) # ignore hash collision
+insert: O(1)
 
 delete: O(1)
 
 search: O(1)
 ```
 
-###### Considering worst case scenario
+###### Considering worst case scenario and ignoring hash collisions
+
+###### More on hash collisions: https://en.wikipedia.org/wiki/Hash_collision
 
 ---
 
