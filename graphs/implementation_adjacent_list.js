@@ -41,3 +41,21 @@ graph.addEdge("0", "2");
 graph.addEdge("6", "5");
 
 graph.showConnections();
+
+let initialState = {
+  expense: false,
+  income: false,
+  lend: false,
+};
+const [trans, setTrans] = useState({
+  ...initialState,
+});
+
+const setRadio = (event) => {
+  const buttonName = event.target.id;
+  let radioObj = {
+    ...initialState,
+    [buttonName]: true,
+  };
+  setTrans(radioObj);
+};
