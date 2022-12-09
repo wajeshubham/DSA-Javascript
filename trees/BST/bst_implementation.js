@@ -69,6 +69,100 @@ class BinarySearchTree {
     this.root = this.#remove(this.root, value);
   }
 
+  breadthFirstSearch() {
+    let currentNode = this.root;
+    let visitedNodes = [];
+    let unvisitedQueue = [];
+
+    unvisitedQueue.push(currentNode);
+
+    while (unvisitedQueue.length > 0) {
+      currentNode = unvisitedQueue.shift();
+      visitedNodes.push(currentNode.value);
+      if (currentNode.left) {
+        unvisitedQueue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        unvisitedQueue.push(currentNode.right);
+      }
+    }
+    return visitedNodes;
+  }
+
+  recursiveBreadthFirstSearch(queue, list) {
+    if (queue.length === 0) return list;
+    let currentNode = queue.shift();
+    list.push(currentNode.value);
+    if (currentNode.left) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right) {
+      queue.push(currentNode.right);
+    }
+
+    return this.recursiveBreadthFirstSearch(queue, list);
+  }
+
+  depthFirstSearch() {
+    let currentNode = this.root;
+    let visitedNodes = [];
+    let unvisitedStack = [];
+
+    unvisitedStack.push(currentNode);
+
+    while (unvisitedStack.length > 0) {
+      currentNode = unvisitedStack.pop();
+      visitedNodes.push(currentNode.value);
+      if (currentNode.right) {
+        unvisitedStack.push(currentNode.right);
+      }
+      if (currentNode.left) {
+        unvisitedStack.push(currentNode.left);
+      }
+    }
+    return visitedNodes;
+  }
+
+  inOrderDepthFirstSearch(root, list) {
+    let currentNode = root;
+    if (!currentNode) return list;
+    // Go deep in the left
+    if (currentNode.left) {
+      this.inOrderDepthFirstSearch(currentNode.left, list);
+    }
+    list.push(currentNode.value);
+    if (currentNode.right) {
+      this.inOrderDepthFirstSearch(currentNode.right, list);
+    }
+    return list; // once we get to the leaf return list by pushing that leaf
+  }
+
+  preOrderDepthFirstSearch(root, list) {
+    let currentNode = root;
+    if (!currentNode) return list;
+    list.push(currentNode.value);
+    if (currentNode.left) {
+      this.preOrderDepthFirstSearch(currentNode.left, list);
+    }
+    if (currentNode.right) {
+      this.preOrderDepthFirstSearch(currentNode.right, list);
+    }
+    return list;
+  }
+
+  postOrderDepthFirstSearch(root, list) {
+    let currentNode = root;
+    if (!currentNode) return list;
+    if (currentNode.left) {
+      this.postOrderDepthFirstSearch(currentNode.left, list);
+    }
+    if (currentNode.right) {
+      this.postOrderDepthFirstSearch(currentNode.right, list);
+    }
+    list.push(currentNode.value);
+    return list;
+  }
+
   #remove(root, value) {
     if (!root) return null;
     if (root.value > value) root.left = this.#remove(root.left, value);
@@ -114,14 +208,32 @@ binary.insert(4);
 binary.insert(6);
 binary.insert(20);
 binary.insert(170);
-binary.insert(270);
 binary.insert(15);
 binary.insert(1);
-binary.insert(0);
 
-console.log(binary.maxValue());
+//       9
+//   4      20
+// 1  6   15  170
 
-binary.delete(9);
-binary.delete(15);
+// console.log(binary.maxValue());
 
-console.log(traverse(binary.root));
+// binary.delete(9);
+// binary.delete(15);
+
+// console.log(traverse(binary.root));
+
+// console.log("DFSR: ", binary.recursiveDepthFirstSearch(binary.root, []));
+// console.log("DFS: ", binary.depthFirstSearch(binary.root, []));
+
+// console.log("BFSR: ", binary.recursiveBreadthFirstSearch([binary.root], []));
+// console.log("BFS: ", binary.breadthFirstSearch());
+
+console.log("In order DFS: ", binary.inOrderDepthFirstSearch(binary.root, []));
+console.log(
+  "Pre order DFS: ",
+  binary.preOrderDepthFirstSearch(binary.root, [])
+);
+console.log(
+  "Post order DFS: ",
+  binary.postOrderDepthFirstSearch(binary.root, [])
+);
